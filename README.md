@@ -11,7 +11,7 @@ mergeStrainFiles() - creates/merges a genome file representative of your sample
 filterSNP_RS_Vals() - creates 2 files for each chromosome, one with only the SNPs in that chromosome and one containing all other SNPs
 fastLMM() - perform GWAS by calling FaST-LMM, using leave-one-chromosome-out linkage disequilibrium contamination control
 mergeResults()  - merges the results from each chromosome into a master file, calculating Q-values / false-discovery rate statistics, and generates summary files across phenotypes for lowest Ps/Qs
-
+*** IMPORTANT NOTE: mergeResults() REQUIRES the Matlab Bioinformatics toolkit.  If you don't have it, you cannot calculate FDR stats - comment out the relevant lines, or use your own mafdr.m in place (see this function's inputs/outputs format in code to make sure it matches, or change code accordingly).
 Functions are described in greater detail in the header of the function, including explanations of all arguments and outputs; additional auxiliary functions are present which are also described headers.
 
 
