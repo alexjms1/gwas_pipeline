@@ -1,7 +1,7 @@
 function mergeResults(root, filenames, testQvals, cov, append)
 % This function takes results by individual chromosomes for specified
 % phenotypes (filenames) and merges them into a single tab-delimited file
-% named 'Output\' root '\Merged\' root '.' filenames{phenotype}
+% named 'C:\FastLMM\CPP_MKL\Output\' root '\Merged\' root '.' filenames{phenotype}
 % '.all.fastlmm.txt'. Resultant files can be loaded into Haploview for
 % visualization.  Additionally, since Q-values in individual
 % chromosomes' results files are not able to control for false-discovery
@@ -13,7 +13,7 @@ function mergeResults(root, filenames, testQvals, cov, append)
 % 
 % INPUTS:
 %   root: main directory where FaST-LMM results are found, code as
-%       'Output\' root '\' root '.' filenames.
+%       'C:\FastLMM\CPP_MKL\Output\' root '\' root '.' filenames.
 %   filenames: filenames as above, specifying phenotypes, in the form  root
 %       '.'  filename[s] '.Chrom' chr '.fastlmm.txt']
 %   testQvals: a variable indicating whether to test Q values across all
@@ -46,7 +46,7 @@ lowestP_rs = cell(1,numFiles);
 
 for phenotype=1:numFiles
     chrom=1;
-    currFile = ['Output\' root '\' root '.'  filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt'];
+    currFile = ['C:\FastLMM\CPP_MKL\Output\' root '\' root '.'  filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt'];
     if(exist(currFile,'file'))
         fileID = fopen(currFile);
         if ~cov
@@ -74,7 +74,7 @@ for phenotype=1:numFiles
         data{chrom} = textscan(fileID,columnFormat,'HeaderLines',1,'Delimiter','\t');
         fclose(fileID);
         chrom=chrom+1;
-        currFile = ['Output\' root '\' root '.' filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt']; 
+        currFile = ['C:\FastLMM\CPP_MKL\Output\' root '\' root '.' filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt']; 
     end
     if ~(chrom==21)
         disp(['File ' root '.'  filenames{phenotype} ' for chromosome ' num2str(chrom) ' not found']);
@@ -131,7 +131,7 @@ for phenotype=1:numFiles
             fdrBHPoly = mafdr(pvals,'BHFDR',true,'Method','Polynomial');
         end
     end
-    fileID=fopen(['Output\' root '\Merged\' root '.' filenames{phenotype} '.all.fastlmm.txt'],'w');
+    fileID=fopen(['C:\FastLMM\CPP_MKL\Output\' root '\Merged\' root '.' filenames{phenotype} '.all.fastlmm.txt'],'w');
     numHeaders = size(dataHeaders,2)-1;
     for i=1:numHeaders
         fprintf(fileID,'%s\t',dataHeaders{i}{1});
@@ -230,13 +230,13 @@ else
 end
 if numFiles
     if testQvals
-        summaryFile = fopen(['Output\' root '\Merged\for.' root '.LowestPsQs.txt'],writePriv);
+        summaryFile = fopen(['C:\FastLMM\CPP_MKL\Output\' root '\Merged\for.' root '.LowestPsQs.txt'],writePriv);
         fprintf(summaryFile,'Phen\tPval\tpFDR\tQval\tBHFDR\tbestChr\tPos\tbestRS\n');
         for cnt=1:numFiles
             fprintf(summaryFile,'%s\t%.10f\t%.15f\t%.15f\t%.15f\t%.0u\t%u\t%s\n',filenames{cnt}, lowestPs(cnt), lowestStFDRs(cnt), lowestStQs(cnt), lowestBHFDRs(cnt), lowestP_chr(cnt), lowestP_pos(cnt), lowestP_rs{cnt});
         end
     else
-        summaryFile = fopen(['Output\' root '\Merged\for.' root '.LowestPs.txt'],writePriv);
+        summaryFile = fopen(['C:\FastLMM\CPP_MKL\Output\' root '\Merged\for.' root '.LowestPs.txt'],writePriv);
         fprintf(summaryFile,'Phen\tPval\tbestChr\tPos\tbestRS\n');
         for cnt=1:numFiles
             fprintf(summaryFile,'%s\t%.10f\t%.0u\t%u\t%s\n',filenames{cnt}, lowestPs(cnt), lowestP_chr(cnt), lowestP_pos(cnt), lowestP_rs{cnt});

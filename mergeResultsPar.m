@@ -34,7 +34,7 @@ lowestP_rs = cell(1,numFiles);
 
 parfor phenotype=1:numFiles
     chrom=1;
-    currFile = ['Output\' root '\' root '.'  filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt'];
+    currFile = ['C:\FastLMM\CPP_MKL\Output\' root '\' root '.'  filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt'];
     if(exist(currFile,'file'))
         fileID = fopen(currFile);
         columnFormat = repmat('%s',1,25);
@@ -54,7 +54,7 @@ parfor phenotype=1:numFiles
         data{chrom} = textscan(fileID,columnFormat,'HeaderLines',1,'Delimiter','\t');
         fclose(fileID);
         chrom=chrom+1;
-        currFile = ['Output\' root '\' root '.' filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt']; 
+        currFile = ['C:\FastLMM\CPP_MKL\Output\' root '\' root '.' filenames{phenotype} '.Chrom' num2str(chrom) '.fastlmm.txt']; 
     end
     if ~(chrom==21)
         disp(['File ' root '.'  filenames{phenotype} ' for chromosome ' num2str(chrom) ' not found']);
@@ -106,7 +106,7 @@ parfor phenotype=1:numFiles
             fdrBHPoly = mafdr(pvals,'BHFDR',true,'Method','Polynomial');
         end
     end
-    fileID=fopen(['Output\' root '\Merged\parfor\' root '.' filenames{phenotype} '.all.fastlmm.txt'],'w');
+    fileID=fopen(['C:\FastLMM\CPP_MKL\Output\' root '\Merged\parfor\' root '.' filenames{phenotype} '.all.fastlmm.txt'],'w');
     numHeaders = size(dataHeaders,2)-1;
     for i=1:numHeaders
         fprintf(fileID,'%s\t',dataHeaders{i}{1});
@@ -173,13 +173,13 @@ else
 end
 if numFiles
     if testQvals
-        summaryFile = fopen(['Output\' root '\Merged\parfor.' root '.LowestPsQs.txt'],writePriv);
+        summaryFile = fopen(['C:\FastLMM\CPP_MKL\Output\' root '\Merged\parfor.' root '.LowestPsQs.txt'],writePriv);
         fprintf(summaryFile,'Phen\tPval\tpFDR\tQval\tBHFDR\tbestChrPos\t\tbestRS\n');
         for cnt=1:numFiles
             fprintf(summaryFile,'%s\t%.10f\t%.15f\t%.15f\t%.15f\t%.0u\t%u\t%s\n',filenames{cnt}, lowestPs(cnt), lowestStFDRs(cnt), lowestStQs(cnt), lowestBHFDRs(cnt), lowestP_chr(cnt), lowestP_pos(cnt), lowestP_rs{cnt});
         end
     else
-        summaryFile = fopen(['Output\' root '\Merged\parfor.' root '.LowestPs.txt'],writePriv);
+        summaryFile = fopen(['C:\FastLMM\CPP_MKL\Output\' root '\Merged\parfor.' root '.LowestPs.txt'],writePriv);
         fprintf(summaryFile,'Phen\tPval\tbestChrPos\t\tbestRS\n');
         for cnt=1:numFiles
             fprintf(summaryFile,'%s\t%.10f\t%.0u\t%u\t%s\n',filenames{cnt}, lowestPs(cnt), lowestP_chr(cnt), lowestP_pos(cnt), lowestP_rs{cnt});

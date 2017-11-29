@@ -28,7 +28,7 @@ if nargin < 5
     error('Not enough arguments passed to function. 5 are required');
 end
 %varargin = 
-phenos = importdata(['Files\' phenotypeFile '.txt'],'\t');
+phenos = importdata(['C:\FastLMM\CPP_MKL\Files\' phenotypeFile '.txt'],'\t');
 if iscell(phenotypesTesting)
     phenoNumbers = zeros(size(phenotypesTesting,2));
     for i=1:size(phenotypesTesting,2)
@@ -62,11 +62,11 @@ end
 if return_only_names
     return
 end
-if ~exist(['Output\' root],'dir')
-    mkdir(['Output\' root]);
+if ~exist(['C:\FastLMM\CPP_MKL\Output\' root],'dir')
+    mkdir(['C:\FastLMM\CPP_MKL\Output\' root]);
 end
-if ~exist(['Output\' root '\Merged'],'dir')
-    mkdir(['Output\' root '\Merged']);
+if ~exist(['C:\FastLMM\CPP_MKL\Output\' root '\Merged'],'dir')
+    mkdir(['C:\FastLMM\CPP_MKL\Output\' root '\Merged']);
 end
 for i=1:size(phenotypesTesting,2)
     parfor chromosome=1:20
